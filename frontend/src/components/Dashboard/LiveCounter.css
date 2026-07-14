@@ -1,0 +1,116 @@
+.live-counter {
+  padding: var(--space-lg);
+  text-align: center;
+}
+.counter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+.counter-header h4 { font-size: 0.95rem; }
+.live-dot-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--status-occupied);
+}
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-occupied);
+  animation: live-glow 2s ease-in-out infinite;
+}
+
+.counter-ring-container {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto var(--space-lg);
+}
+
+/* Sensor-sweep pulse ring */
+.counter-ring-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.ring-sweep {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  opacity: 0;
+  transform-origin: center;
+  animation: ring-pulse 3s ease-out infinite;
+}
+
+.counter-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.ring-bg {
+  fill: none;
+  stroke: var(--border-mid);
+  stroke-width: 7;
+}
+.ring-fill {
+  fill: none;
+  stroke-width: 7;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.8s cubic-bezier(0.19, 1, 0.22, 1), stroke 0.4s ease;
+}
+.counter-ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.counter-pct {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.3s ease;
+}
+.counter-bump {
+  animation: statusChange 0.3s ease;
+}
+.counter-pct-label {
+  margin-top: 2px;
+}
+
+.counter-details {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+.counter-detail {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.detail-icon {
+  flex-shrink: 0;
+}
+.detail-icon.available { color: var(--status-available); }
+.detail-icon.occupied { color: var(--status-occupied); }
+.detail-icon.total { color: var(--text-muted); }
+.detail-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.detail-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}

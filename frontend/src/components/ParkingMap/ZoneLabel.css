@@ -1,0 +1,41 @@
+.zone-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+.zone-name {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.zone-subtitle {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+.zone-label-right {
+  text-align: right;
+}
+.zone-count {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.zone-bar {
+  width: 56px;
+  height: 3px;
+  background: var(--border-mid);
+  border-radius: var(--radius-full);
+  margin-top: 3px;
+  overflow: hidden;
+}
+.zone-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base), background var(--transition-base);
+}

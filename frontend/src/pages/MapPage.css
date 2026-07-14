@@ -1,0 +1,74 @@
+.map-page {}
+
+.map-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.map-main {
+  min-width: 0;
+}
+
+.map-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: sticky;
+  top: 80px;
+}
+
+.slot-detail {
+  padding: var(--space-lg);
+}
+.slot-detail h4 {
+  margin-bottom: var(--space-md);
+  font-size: 1rem;
+}
+.slot-detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.detail-key {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.detail-val {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.error-text {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--status-occupied-fg);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.spin-icon {
+  animation: spin 0.8s linear infinite;
+}
+
+@media (max-width: 1024px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+  .map-sidebar {
+    position: static;
+  }
+}

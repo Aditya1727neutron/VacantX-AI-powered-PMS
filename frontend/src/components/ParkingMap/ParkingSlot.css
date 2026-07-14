@@ -1,0 +1,77 @@
+.parking-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1.5;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), transform var(--transition-fast), background-color 0.6s ease;
+  font-size: 0.65rem;
+  font-weight: 600;
+  user-select: none;
+  min-height: 34px;
+}
+
+.slot-available {
+  background: var(--status-available-bg);
+  border: 1.5px solid var(--status-available);
+  color: var(--status-available-fg);
+}
+.slot-available:hover,
+.slot-available:focus-visible {
+  border-color: var(--status-available-fg);
+  transform: scale(1.06);
+}
+
+.slot-occupied {
+  background: var(--status-occupied-bg);
+  border: 1.5px solid var(--status-occupied);
+  color: var(--status-occupied-fg);
+}
+.slot-occupied:hover,
+.slot-occupied:focus-visible {
+  border-color: var(--status-occupied-fg);
+  transform: scale(1.06);
+}
+
+.parking-slot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  z-index: 5;
+}
+
+.slot-recommended {
+  border-color: var(--accent) !important;
+  border-width: 2px;
+  background: var(--accent-subtle) !important;
+  color: var(--accent) !important;
+  transform: scale(1.08);
+  z-index: 3;
+  animation: pulse-recommend 2s infinite;
+}
+
+.slot-hovered {
+  z-index: 4;
+}
+
+.slot-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.slot-type-icon {
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  opacity: 0.6;
+  display: flex;
+}
+
+.slot-status-icon {
+  position: absolute;
+  bottom: 1px;
+  left: 2px;
+  opacity: 0.4;
+  display: flex;
+}

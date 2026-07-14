@@ -1,0 +1,158 @@
+.parking-map-wrapper {
+  position: relative;
+}
+
+.map-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+.legend-dot.available { background: var(--status-available); }
+.legend-dot.occupied { background: var(--status-occupied); }
+.legend-dot.recommended { background: var(--accent); animation: pulse-recommend 2s infinite; }
+.legend-dot.handicap { background: var(--status-accessible); }
+
+/* Map container */
+.parking-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-lg);
+  padding: var(--space-2xl);
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  min-height: 500px;
+}
+
+/* Roads — crisper dashes */
+.road {
+  position: absolute;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--text-muted) 0px,
+    var(--text-muted) 16px,
+    transparent 16px,
+    transparent 24px
+  );
+  opacity: 0.2;
+  z-index: 1;
+  pointer-events: none;
+}
+.road-horizontal {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.road-vertical {
+  height: 100%;
+  width: 2px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(
+    0deg,
+    var(--text-muted) 0px,
+    var(--text-muted) 16px,
+    transparent 16px,
+    transparent 24px
+  );
+}
+
+/* Zones */
+.zone-area {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-md);
+  background: var(--bg-raised);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: border-color var(--transition-base), background var(--transition-base);
+}
+.zone-area:hover {
+  border-color: var(--border-mid);
+  background: var(--bg-surface);
+}
+
+.zone-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-top: var(--space-sm);
+}
+
+/* Gates — cleaner, crisper */
+.gate-marker {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  z-index: 5;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+}
+.gate-icon {
+  display: flex;
+  color: var(--accent);
+}
+.gate-label { font-weight: 600; }
+
+/* Tooltip */
+.slot-tooltip {
+  position: sticky;
+  bottom: 0;
+  margin-top: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-mid);
+  font-size: 0.875rem;
+  text-align: center;
+  animation: fadeIn 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+.slot-type-badge {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  color: var(--status-accessible);
+}
+
+@media (max-width: 768px) {
+  .parking-map {
+    grid-template-columns: 1fr;
+    padding: var(--space-lg);
+  }
+  .zone-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .road { display: none; }
+  .gate-marker { display: none; }
+  .map-legend { flex-wrap: wrap; gap: var(--space-md); }
+}

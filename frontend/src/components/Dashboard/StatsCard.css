@@ -1,0 +1,38 @@
+.stats-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+}
+.stats-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.stats-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.stats-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+.stats-label {
+  /* text-eyebrow class provides base styling */
+  order: -1;
+}
+.stats-subtext {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
