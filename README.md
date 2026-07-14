@@ -421,7 +421,7 @@ Responsible for:
 
 ---
 
-# 📌 Use Cases
+#  Use Cases
 
 VacantX can be adapted for:
 
@@ -435,18 +435,18 @@ VacantX can be adapted for:
 
 ---
 
-# 📜 License
+#  License
 
 This project is developed for educational and academic purposes as part of a Bachelor of Technology (B.Tech) project.
 
 ---
 
-# ⭐ Acknowledgements
+#  Acknowledgements
 
 Special thanks to our faculty mentor and project team members for their guidance and collaboration throughout the development of VacantX.
 
 ---
 
-## 💡 Vision
+##  Vision
 
 > **VacantX aims to transform traditional parking management into an intelligent, data-driven experience by combining real-time monitoring, predictive analytics, and modern web technologies to create a smarter, more efficient campus parking ecosystem.**
