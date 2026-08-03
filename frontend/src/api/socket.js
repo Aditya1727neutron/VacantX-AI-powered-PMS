@@ -2,7 +2,7 @@
  * WebSocket connection for real-time slot updates.
  * Uses exponential backoff to prevent connection spam.
  */
-const WS_URL = 'ws://localhost:8000/ws';
+const WS_URL = 'wss://vacantx-ai-powered-pms.onrender.com';
 
 let ws = null;
 let reconnectTimer = null;
