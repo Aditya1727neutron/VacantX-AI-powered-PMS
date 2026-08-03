@@ -1,26 +1,36 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Settings, Lock, Loader2, Dices, RotateCcw, RefreshCw, ParkingCircle, CircleCheck, Car, BarChart3 } from 'lucide-react';
 import StatsCard from '../components/Dashboard/StatsCard';
 import { getAdminDashboard, simulateParking, resetAllSlots } from '../api/parkingAPI';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
 import { getOccupancyBadge } from '../utils/helpers';
 import './AdminPage.css';
 
 export default function AdminPage() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
   const [dashboard, setDashboard] = useState(null);
   const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
   const [simulating, setSimulating] = useState(false);
   const [resetting, setResetting] = useState(false);
 
+  // Redirect non-admin users to home with "Access Denied" message
   useEffect(() => {
-    fetchDashboard();
-  }, []);
+    if (!loading && (!user || user.role !== 'admin')) {
+      navigate('/', { replace: true, state: { accessDenied: true } });
+    }
+  }, [user, loading, navigate]);
+
+  useEffect(() => {
+    if (user?.role === 'admin') {
+      fetchDashboard();
+    }
+  }, [user]);
 
   const fetchDashboard = async () => {
-    setLoading(true);
+    setDataLoading(true);
     try {
       const res = await getAdminDashboard();
       setDashboard(res.data);
@@ -28,7 +38,7 @@ export default function AdminPage() {
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false);
+      setDataLoading(false);
     }
   };
 
@@ -57,17 +67,9 @@ export default function AdminPage() {
     }
   };
 
-  if (!user) {
-    return (
-      <div className="page-container admin-login-prompt">
-        <div className="glass-card prompt-card">
-          <span className="prompt-icon-wrap"><Lock size={28} /></span>
-          <h2>Admin Access Required</h2>
-          <p>Please sign in with an admin account to access this panel.</p>
-          <Link to="/login" className="btn btn-primary">Sign In</Link>
-        </div>
-      </div>
-    );
+  // Don't render anything while auth is loading or if user is not admin (redirect is in progress)
+  if (loading || !user || user.role !== 'admin') {
+    return null;
   }
 
   const stats = dashboard?.stats;

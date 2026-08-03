@@ -29,9 +29,11 @@ export default function Navbar() {
           <NavLink to="/predictions" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
             <BarChart3 size={16} /> Predictions
           </NavLink>
-          <NavLink to="/admin" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-            <Settings size={16} /> Admin
-          </NavLink>
+          {user?.role === 'admin' && (
+            <NavLink to="/admin" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+              <Settings size={16} /> Admin
+            </NavLink>
+          )}
         </div>
 
         <div className="navbar-right">

@@ -20,7 +20,7 @@ def require_admin(current_user: User = Depends(get_current_user)):
 
 
 @router.get("/dashboard")
-def admin_dashboard(db: Session = Depends(get_db)):
+def admin_dashboard(db: Session = Depends(get_db), current_user: User = Depends(require_admin)):
     """Admin dashboard with stats and recent logs."""
     stats = get_stats(db)
     logs = get_logs(db, limit=20)
@@ -42,7 +42,7 @@ def admin_dashboard(db: Session = Depends(get_db)):
 
 
 @router.post("/simulate")
-async def simulate_parking(db: Session = Depends(get_db)):
+async def simulate_parking(db: Session = Depends(get_db), current_user: User = Depends(require_admin)):
     """Simulate random parking changes for demo purposes."""
     slots = db.query(ParkingSlot).filter(ParkingSlot.is_active == True).all()
     if not slots:
@@ -75,7 +75,7 @@ async def simulate_parking(db: Session = Depends(get_db)):
 
 
 @router.post("/reset")
-async def reset_all_slots(db: Session = Depends(get_db)):
+async def reset_all_slots(db: Session = Depends(get_db), current_user: User = Depends(require_admin)):
     """Reset all slots to available."""
     slots = db.query(ParkingSlot).all()
     for slot in slots:

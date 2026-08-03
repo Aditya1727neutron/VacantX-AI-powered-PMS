@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Map, BarChart3, ParkingCircle, CircleCheck, Car, Compass, BrainCircuit, Zap, Smartphone, Lock, Clock } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Map, BarChart3, ParkingCircle, CircleCheck, Car, Compass, BrainCircuit, Zap, Smartphone, Lock, Clock, ShieldAlert, X } from 'lucide-react';
 import StatsCard from '../components/Dashboard/StatsCard';
 import LiveCounter from '../components/Dashboard/LiveCounter';
 import { useParking } from '../hooks/useParking';
@@ -10,14 +10,38 @@ import './HomePage.css';
 export default function HomePage() {
   const { stats, loading } = useParking();
   const [currentTime, setCurrentTime] = useState(new Date());
+  const location = useLocation();
+  const [accessDenied, setAccessDenied] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  // Show "Access Denied" toast when redirected from admin page
+  useEffect(() => {
+    if (location.state?.accessDenied) {
+      setAccessDenied(true);
+      // Clear the navigation state so it doesn't persist on refresh
+      window.history.replaceState({}, document.title);
+      // Auto-dismiss after 5 seconds
+      const timer = setTimeout(() => setAccessDenied(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [location.state]);
+
   return (
     <div className="home-page page-container">
+      {/* Access Denied Toast */}
+      {accessDenied && (
+        <div className="access-denied-toast fade-in">
+          <ShieldAlert size={18} />
+          <span>Access Denied — You do not have admin privileges to view that page.</span>
+          <button className="toast-close" onClick={() => setAccessDenied(false)} aria-label="Dismiss">
+            <X size={16} />
+          </button>
+        </div>
+      )}
       {/* Hero */}
       <section className="hero fade-in">
         <div className="hero-content">
